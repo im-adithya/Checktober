@@ -1,8 +1,20 @@
+:root {
+  --bg-theme: #f4f0e1;
+  --bg-popup: #fbd38f;
+  --main-color: #f74700;
+  --main-hover: #d43c00;
+}
+
+a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
 body {
   margin: 0;
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +22,30 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+main {
+  background-color: var(--bg-theme);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--bg-popup);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--main-color); 
+  border-radius: 7px;
+  border: solid 3px var(--bg-popup);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-hover); 
 }
