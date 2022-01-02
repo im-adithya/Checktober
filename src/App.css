@@ -1,38 +1,442 @@
-.App {
-  text-align: center;
+.branch, .hflogo{
+  width: 170px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.branch{
+  display: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.button{
+  background-color: var(--main-color) !important;
   color: white;
+  font-weight: bold !important;
+  border: none !important;
+  font-size: 0.9rem !important;
+  height: 30px;
+  border-radius: 15px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-.App-link {
-  color: #61dafb;
+.button:focus{
+  box-shadow: 0 0 0 0.2rem rgb(247 71 0 / 50%) !important;
 }
 
-@keyframes App-logo-spin {
+.filterheading{
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--main-color);
+  border-bottom: 2px solid var(--main-color);
+}
+
+.filtermenu{
+  border: 2px solid var(--main-color);
+  font-weight: 600;
+  font-size: 15px;
+  height: 30px;
+  border-radius: 15px;
+  color: var(--main-color);
+}
+
+.filternotif{
+  color: white;
+  background-color: var(--main-color);
+  height: 12px;
+  width: 12px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  line-height: 0;
+}
+
+.filterpopup{
+  z-index: 10;
+  background-color: var(--bg-theme);
+  border: 1px solid var(--main-color);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 15px #fbbf92;
+  width: 80vw;
+  max-width: 500px;
+}
+
+.formbox{
+  max-width: 500px !important;
+  background-color: var(--bg-popup);
+  border: 2px solid var(--main-color);
+  color: var(--main-color);
+  border-radius: 20px;
+  padding: 25px !important;
+}
+
+.githubbox{
+  width: 100%;
+  max-width: 500px !important;
+  background-color: var(--bg-popup);
+  border: 1.5px solid var(--main-color);
+  color: var(--main-color);
+  border-radius: 10px;
+  padding: 10px !important;
+  transition: 0.3s;
+}
+
+.headline-1{
+  font-weight: 650;
+  color: var(--main-color);
+}
+
+.input{
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+  outline: none;
+  font-size: 0.9rem;
+  padding: 4px 16px;
+  height: 30px;
+  border-radius: 15px;
+}
+
+.input:focus{
+  box-shadow: 0 0 0 0.1rem rgb(247 71 0 / 50%) !important;
+}
+
+.label{
+  margin: 0;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--main-color);
+}
+
+.lablang{
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--main-color);
+}
+
+.navbar{
+  position: absolute !important;
+  width: 100%;
+  background-color: transparent;
+}
+
+.nav-link{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.popup{
+  background-color: var(--bg-popup);
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+  height: 2rem;
+  border-radius: 1rem;
+  width: 90%;
+  top: 5rem;
+}
+
+.pt-140{
+  padding-top: 140px !important;
+}
+
+.react-switch-bg{
+  border: 1.5px solid var(--main-color);
+}
+
+.tabswitchxs-issues, .tabswitchxs-progress, .tabswitchlg-issues, .tabswitchlg-progress{
+  background-color: var(--bg-popup);
+  color: var(--main-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tabswitchxs-issues, .tabswitchxs-progress{
+  font-size: 14px;
+  font-weight: 700;
+  height: 30px;
+  padding: 0 15px;
+}
+
+.tabswitchlg-issues, .tabswitchlg-progress{
+  font-size: 18px;
+  font-weight: 800;
+  height: 50px;
+  width: 150px;
+}
+
+.tabswitchxs-issues{
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.tabswitchxs-progress{
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.tabswitchlg-issues, .tabswitchlg-progress{
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.tabswitchxs-issues-active, .tabswitchxs-progress-active, .tabswitchlg-issues-active, .tabswitchlg-progress-active{
+  background-color: var(--main-color);
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabswitchxs-issues-active, .tabswitchxs-progress-active{
+  font-size: 16px;
+  font-weight: 800;
+  height: 40px;
+}
+
+.tabswitchlg-issues-active, .tabswitchlg-progress-active{
+  font-size: 22px;
+  font-weight: 800;
+  height: 60px;
+  width: 200px;
+}
+
+.tabswitchxs-issues-active{
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding: 0 10px 0 15px;
+}
+
+.tabswitchxs-progress-active{
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 0 15px 0 10px;
+}
+
+.tabswitchlg-issues-active, .tabswitchlg-progress-active{
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.translate-branch{
+  transform: translate(-80%,-85%)!important;
+}
+
+.zindex1{
+  z-index: 1 !important;
+}
+
+.zindex10{
+  z-index: 10 !important;
+}
+
+.scroll-x{
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space:nowrap;
+}
+
+.scroll-x::-webkit-scrollbar {
+  display: none;
+}
+
+.start-95 {
+  left: 95%!important;
+}
+
+.username{
+  padding: 0 !important;
+  font-size: 1rem;
+}
+
+.quote{
+  padding: 0 !important;
+  font-weight: 500;
+  font-size: 0.6rem;
+  margin-bottom: 0;
+}
+
+.orgname{
+  padding: 0 !important;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.title{
+  padding: 0 15px 0 0!important;
+  font-weight: 500;
+  font-size: 0.75rem;
+  margin-right: 5px;
+  margin-bottom: 0;
+}
+
+.description{
+  font-size: 0.7rem;
+  margin-bottom: 0;
+}
+
+.prs{
+  font-size: 1.5rem;
+}
+
+.issueimage{
+  border-radius: 50%;
+  border: 1.5px solid var(--main-color);
+  height: 30px;
+  background-color: white;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.primage{
+  height: 25px;
+}
+
+.pullrequests, .issues{
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.pullrequests{
+  border-top: 3px solid var(--main-color);
+  border-bottom: 3px solid var(--main-color);
+  padding: 0 20px 0 20px;
+  margin-bottom: 15px;
+}
+
+.pullrequests::-webkit-scrollbar {
+  width: 0;
+}
+
+.issues{
+  padding: 5px 0 0 0;
+  margin-bottom: 5px;
+}
+
+.issues::-webkit-scrollbar {
+  width: 6px;
+}
+
+.issues::-webkit-scrollbar-track {
+  background: var(--bg-theme);
+}
+
+.issues::-webkit-scrollbar-thumb {
+  background: var(--main-color);
+  border-radius: 3px;
+  border: 0
+}
+
+.issues::-webkit-scrollbar-thumb:hover {
+  background: var(--main-hover); 
+}
+
+.tag{
+  color: white;
+  background-color: var(--main-color);
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 2px 10px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+.translate-modified{
+  transform: translate(-80%,-50%)!important;
+}
+
+.githubbox:hover{
+  box-shadow: 0 0 10px #ffa159;
+  cursor: pointer;
+}
+
+.githubbox:hover .compflower{
+  animation: spin 5s infinite linear;
+}
+
+.githublogo{
+  transition: 0.5s
+}
+
+.githublogo:hover {
+  -webkit-filter: drop-shadow(0px 0px 5px #00000077);
+  filter: drop-shadow(0px 0px 5px #00000077);
+}
+
+@keyframes spin {
   from {
-    transform: rotate(0deg);
+    transform: translate(-50%,-50%) rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: translate(-50%,-50%) rotate(360deg);
+  }
+}
+
+@media (min-width:576px){
+  .button{
+    font-size: 1rem !important;
+    height: 36px;
+    border-radius: 18px !important;
+  }
+  
+  .githubbox{
+    min-width: 500px !important;
+  }
+
+  .issueimage{
+    height: 40px;
+  }
+
+  .input{
+    font-size: 1rem;
+    padding: 4px 16px;
+    height: 36px;
+    border-radius: 18px;
+  }
+
+  .issues{
+    padding: 5px 10px 0 20px;
+  }
+
+  .username{
+    padding: 0 !important;
+    font-size: 1.5rem;
+  }
+
+  .quote{
+    padding: 0 !important;
+    font-size: 0.75rem;
+  }
+
+  .prs{
+    font-size: 2rem;
+  }
+}
+
+@media (min-width:768px){
+  .popup{
+    width: 40%;
+    top: 1.25rem;
+  }
+
+  .branch, .hflogo{
+    width: 250px;
+  }
+
+  .branch{
+    display: block;
+  }
+}
+
+
+@media (min-width:992px){
+  .popup{
+    width: 30%;
   }
 }
