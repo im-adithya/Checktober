@@ -5,9 +5,9 @@ import { Image, Navbar, Nav } from "react-bootstrap";
 import logo from "../assets/checktober-logo.svg";
 
 const NavigationBar = () => {
-  const date = new Date();
-  const day = date.getDate();
-  const month = date.getMonth();
+  const today = new Date();
+  const currentDay = today.getDate();
+  const currentMonth = today.getMonth();
   return (
     <header>
       <Navbar
@@ -27,13 +27,17 @@ const NavigationBar = () => {
             <div
               style={{ fontSize: "2.5rem", lineHeight: 1, fontWeight: "800" }}
             >
-              {month === 9 ? 31 - day : month < 9 ? 9 - month : 18 - month}
+              {currentMonth === 9
+                ? 31 - currentDay
+                : currentMonth < 9
+                ? 9 - currentMonth
+                : 18 - currentMonth}
             </div>
             <div
               style={{ fontSize: "0.6rem", fontWeight: "800" }}
               className="m-0"
             >
-              {month === 9 ? "Days to Go" : "Months to Begin"}!
+              {currentMonth === 9 ? "Days to Go" : "Months to Begin"}!
             </div>
           </div>
         </Nav>
