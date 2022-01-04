@@ -7,6 +7,10 @@
   --main-hover: #d43c00;
 }
 
+html, body{
+  height: 100%;
+}
+
 a {
   color: inherit !important;
   text-decoration: none !important;

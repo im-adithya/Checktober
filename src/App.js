@@ -5,9 +5,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { UserProvider } from "./User";
-import PrivateRoute from "./PrivateRoute";
-
 import NavigationBar from "./components/NavigationBar";
 import Notif from "./components/Notif";
 
@@ -25,10 +22,8 @@ function App() {
       <Notif />
       <main>
         <Route exact path="/" component={LandingScreen} />
-        <UserProvider>
-          <PrivateRoute path="/progress" component={ProgressScreen} />
-          <PrivateRoute path="/issues" component={IssuesScreen} />
-        </UserProvider>
+        <Route exact path="/progress/:username" component={ProgressScreen} />
+        <Route path="/issues/:username" component={IssuesScreen} />
       </main>
       <a href={"https://github.com/im-adithya/Checktober"}>
         <Image

@@ -337,13 +337,14 @@
   background: var(--main-hover); 
 }
 
-.tag{
+.tag {
   color: white;
   background-color: var(--main-color);
   font-weight: 700;
   font-size: 0.75rem;
   padding: 2px 10px;
   height: 20px;
+  white-space: nowrap;
   border-radius: 10px;
 }
 
@@ -367,6 +368,71 @@
 .githublogo:hover {
   -webkit-filter: drop-shadow(0px 0px 5px #00000077);
   filter: drop-shadow(0px 0px 5px #00000077);
+}
+
+.spin {
+  animation: traditionalspin 5s infinite linear;
+}
+
+.loadertext{
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--main-color);
+  text-align: center;
+  line-height: 1.3rem;
+}
+
+.nopullstext{
+  font-size: 16px;
+  font-weight: 550;
+  color: var(--main-color);
+}
+
+.max-lines {
+  display: block;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 4.5em;
+  line-height: 1.5em;
+}
+
+.issuesbox {
+  width: 95vw !important;
+}
+
+.page {
+  font-size: 20px;
+  color: white;
+  width: 30px;
+  height: 30px;
+  background-color: var(--main-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  margin: 0 30px;
+}
+
+.pagedull {
+  background-color: #ff6a2e;
+  cursor: not-allowed;
+}
+
+.pagenumber{
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--main-color);
+}
+
+@keyframes traditionalspin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
@@ -417,6 +483,10 @@
   .prs{
     font-size: 2rem;
   }
+ 
+  .issuesbox {
+    width: auto !important;
+  }
 }
 
 @media (min-width:768px){
@@ -431,6 +501,15 @@
 
   .branch{
     display: block;
+  }
+
+  .issuesscreen{
+    height: 100vh;
+    max-height: 100vh;
+  }
+
+  .issuesbox {
+    overflow: hidden;
   }
 }
 

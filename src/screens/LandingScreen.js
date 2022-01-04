@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Button, Col, Container, Image } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
 import hflogo from "../assets/hacktoberfest-logo.svg";
 
 const LandingScreen = () => {
+  const [username, setUsername] = useState();
+  const history = useHistory();
+
+  const onCheck = (e) => {
+    e.preventDefault();
+    if (username.trim().length === 0) return;
+    history.push(`/progress/${username.trim()}`);
+  };
+
   return (
     <Container
       className="d-flex flex-column align-items-center pt-140"
@@ -32,27 +42,32 @@ const LandingScreen = () => {
                 here!
               </p>
             </Row>
-            <Row className="justify-content-center align-items-center mt-3 mt-md-4">
+            <form
+              className="row justify-content-center align-items-center mt-3 mt-md-4"
+              onSubmit={onCheck}
+            >
               <Col xs={9} className="pl-0 pr-2 px-md-3">
                 <input
                   type="text"
                   placeholder="GitHub Username"
                   className="w-100 input"
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </Col>
               <Col xs={3} className="pl-1 pr-0 px-md-3">
-                <Button className="button w-100">Check</Button>
+                <Button className="button w-100" type="submit">
+                  Check
+                </Button>
               </Col>
-            </Row>
+            </form>
           </div>
         </Col>
       </Row>
-      <a href={"https://hacktoberfest.digitalocean.com/"}>
-        <Image
-          src={hflogo}
-          className="position-absolute start-50 translate-middle-x hflogo"
-          style={{ bottom: "45px" }}
-        />
+      <a
+        href={"https://hacktoberfest.digitalocean.com/"}
+        className="d-flex flex-column align-items-center justify-content-end h-100"
+      >
+        <Image src={hflogo} className=" hflogo pb-5 mb-4" />
       </a>
     </Container>
   );
