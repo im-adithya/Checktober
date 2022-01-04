@@ -1,12 +1,53 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Row, Col, Container, Image } from "react-bootstrap";
+import axios from "axios";
 
+import {
+  GITHUB_TOKEN,
+  resultPerPage,
+  sortOptions,
+} from "../utils/constants.js";
 import flower from "../assets/flower-icon.svg";
 import GitHubItem from "../components/GitHubItem.js";
 import Filters from "../components/Filters.js";
 import Swapper from "../components/Swapper.js";
 
+String.prototype.camelToSpaces = function () {
+  return this.replace(/([a-z])([A-Z])/g, "$1 $2");
+};
+
+String.prototype.addQuotes = function () {
+  return `"${this}"`;
+};
+
+const hasUpperCase = (str) => {
+  return str.toLowerCase() !== str;
+};
+
+const getActiveItems = (items) => {
+  return Object.keys(items).filter((item) => items[item]);
+};
+
+const formatLabelsForUrl = (labels) => {
+  return labels.map((label) => {
+    if (!hasUpperCase(label)) {
+      return label;
+    }
+    return label.camelToSpaces().toLowerCase().addQuotes();
+  });
+};
+
+const joinItemsForUrl = (items, itemType) => {
+  return items.map((item) => `+${itemType.slice(0, -1)}:${item}`).join("");
+};
+
 const IssuesScreen = ({ match }) => {
+  const [issues, setIssues] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalpages] = useState(1);
+  const [totalResults, setTotalResults] = useState(0);
+
   const [bug, setBug] = useState(false);
   const [doc, setDoc] = useState(false);
   const [gfi, setGfi] = useState(false);
@@ -20,6 +61,64 @@ const IssuesScreen = ({ match }) => {
   const [swift, setSwift] = useState(false);
 
   const [popupxs, setPopupxs] = useState(false);
+
+  const firstIssueRef = useRef(null);
+  const wrapperRef = useRef(null);
+
+  useEffect(() => {
+    const labels = {
+      bug: bug,
+      documentation: doc,
+      goodFirstIssue: gfi,
+      helpWanted: hw,
+    };
+    const activeLabels = getActiveItems(labels);
+    const formattedLabels = formatLabelsForUrl(activeLabels);
+    const joinedLabels = joinItemsForUrl(formattedLabels, "labels");
+
+    const languages = {
+      javascript: js,
+      java: java,
+      php: php,
+      python: python,
+      ruby: ruby,
+      swift: swift,
+    };
+    const activeLanguage = getActiveItems(languages);
+    const joinedLanguage = joinItemsForUrl(activeLanguage, "languages");
+
+    axios
+      .get(
+        `https://api.github.com/search/issues?q=type:issue+label:hacktoberfest${joinedLabels}${joinedLanguage}${sortOptions}&page=${page}`,
+        {
+          headers: {
+            Authorization: `token ${GITHUB_TOKEN}`,
+          },
+        }
+      )
+      .then((res) => {
+        setTotalResults(res.data.total_count);
+        setTotalpages(Math.ceil(totalResults / resultPerPage));
+        const issues = res.data.items;
+        const filteredIssues = issues.map((issue) => {
+          const repo = issue.html_url
+            .substring(0, issue.html_url.search("/issues"))
+            .replace("https://github.com/", "");
+          const repoowner = repo.split("/")[0];
+          return {
+            repo: repo,
+            link: issue.html_url,
+            title: issue.title,
+            description: issue.body,
+            repoowner: repoowner,
+          };
+        });
+        setIssues(filteredIssues);
+        setLoading(false);
+        if (firstIssueRef.current)
+          firstIssueRef.current.scrollIntoView({ behavior: "smooth" });
+      });
+  }, [bug, doc, gfi, hw, js, java, php, python, ruby, swift, page]);
 
   function useOutsideAlerter(ref) {
     useEffect(() => {
@@ -36,19 +135,24 @@ const IssuesScreen = ({ match }) => {
     }, [ref]);
   }
 
-  const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
 
-  return (
-    <Container
-      className="d-flex flex-column align-items-center pt-140"
+  return loading ? (
+    <div
+      className="d-flex flex-column justify-content-center align-items-center loader-screen"
       style={{ height: "100vh", maxHeight: "100vh" }}
     >
+      <img src={flower} width={80} className="spin" />
+      <p className="loadertext mt-3">
+        Fetching
+        <br />
+        Issues
+      </p>
+    </div>
+  ) : (
+    <Container className="d-flex flex-column align-items-center pt-140 issuesscreen">
       {popupxs && (
-        <div
-          className="d-xl-none position-absolute filterpopup"
-          ref={wrapperRef}
-        >
+        <div className="d-xl-none position-fixed filterpopup" ref={wrapperRef}>
           <div className="filterheading d-flex justify-content-between align-items-center mb-3 pb-1">
             <span className="d-flex align-items-center">
               Apply Filters
@@ -75,6 +179,7 @@ const IssuesScreen = ({ match }) => {
               python: setPython,
               ruby: setRuby,
               swift: setSwift,
+              page: setPage,
             }}
           />
         </div>
@@ -100,61 +205,50 @@ const IssuesScreen = ({ match }) => {
           </div>
         </div>
       </Row>
-      <div
-        className="pt-3 d-flex flex-row w-auto"
-        style={{ overflow: "hidden" }}
-      >
+      <div className="pt-3 d-flex flex-row issuesbox">
         <Col className="issues d-flex w-auto flex-column align-items-center">
-          <GitHubItem
-            contri={{
-              type: "issue",
-              title: "An unnecessary issue",
-              repo: "RocketChat/Rocket.Chat",
-              link: "rocketchat",
-              description:
-                "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
-            }}
-          />
-          <GitHubItem
-            contri={{
-              type: "issue",
-              title: "An unnecessary issue",
-              repo: "RocketChat/Rocket.Chat",
-              link: "rocketchat",
-              description:
-                "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
-            }}
-          />
-          <GitHubItem
-            contri={{
-              type: "issue",
-              title: "An unnecessary issue",
-              repo: "RocketChat/Rocket.Chat",
-              link: "rocketchat",
-              description:
-                "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
-            }}
-          />
-          <GitHubItem
-            contri={{
-              type: "issue",
-              title: "An unnecessary issue",
-              repo: "RocketChat/Rocket.Chat",
-              link: "rocketchat",
-              description:
-                "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
-            }}
-          />
-          <GitHubItem
-            contri={{
-              type: "issue",
-              title: "An unnecessary issue",
-              repo: "RocketChat/Rocket.Chat",
-              link: "rocketchat",
-              description:
-                "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
-            }}
-          />
+          <div ref={firstIssueRef}></div>
+          {issues.map((issue, index) => {
+            return (
+              <GitHubItem
+                key={index}
+                contri={{
+                  type: "issue",
+                  title: issue.title,
+                  repo: issue.repo,
+                  repoowner: issue.repoowner,
+                  link: issue.link,
+                  description: issue.description,
+                }}
+              />
+            );
+          })}
+          <div className="d-flex flex-row justify-content-center align-items-center pb-2">
+            <span
+              className={
+                "material-icons-outlined page " +
+                (page !== 1 ? "pointer" : "pagedull")
+              }
+              onClick={() => {
+                page !== 1 ? setPage(page - 1) : page;
+              }}
+            >
+              navigate_before
+            </span>
+            <div className="pagenumber">{page}</div>
+            <span
+              className={
+                "material-icons-outlined page " +
+                (page !== totalPages ? "pointer" : "pagedull")
+              }
+              onClick={() => {
+                page !== totalPages ? setPage(page + 1) : page;
+              }}
+            >
+              navigate_next
+            </span>
+          </div>
+          <div className="lablang">[Total Results: {totalResults}]</div>
         </Col>
         <Col
           xl={{ span: 2, offset: 5 }}
@@ -173,6 +267,7 @@ const IssuesScreen = ({ match }) => {
               python: setPython,
               ruby: setRuby,
               swift: setSwift,
+              page: setPage,
             }}
           />
         </Col>

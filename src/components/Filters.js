@@ -9,7 +9,10 @@ const Filters = ({ values, handlers }) => {
         <div className="d-flex flex-row align-items-center mb-1">
           <Switch
             checked={values.bug}
-            onChange={handlers.bug}
+            onChange={() => {
+              handlers.bug(!values.bug);
+              handlers.page(1);
+            }}
             checkedIcon={false}
             uncheckedIcon={false}
             onColor="#f74700"
@@ -26,7 +29,10 @@ const Filters = ({ values, handlers }) => {
         <div className="d-flex flex-row align-items-center mb-1">
           <Switch
             checked={values.doc}
-            onChange={handlers.doc}
+            onChange={() => {
+              handlers.doc(!values.doc);
+              handlers.page(1);
+            }}
             checkedIcon={false}
             uncheckedIcon={false}
             onColor="#f74700"
@@ -43,7 +49,10 @@ const Filters = ({ values, handlers }) => {
         <div className="d-flex flex-row align-items-center mb-1">
           <Switch
             checked={values.gfi}
-            onChange={handlers.gfi}
+            onChange={() => {
+              handlers.gfi(!values.gfi);
+              handlers.page(1);
+            }}
             checkedIcon={false}
             uncheckedIcon={false}
             onColor="#f74700"
@@ -60,7 +69,10 @@ const Filters = ({ values, handlers }) => {
         <div className="d-flex flex-row align-items-center mb-1">
           <Switch
             checked={values.hw}
-            onChange={handlers.hw}
+            onChange={() => {
+              handlers.hw(!values.hw);
+              handlers.page(1);
+            }}
             checkedIcon={false}
             uncheckedIcon={false}
             onColor="#f74700"
@@ -80,7 +92,10 @@ const Filters = ({ values, handlers }) => {
         <div className="d-flex flex-row align-items-center mb-1">
           <Switch
             checked={values.js}
-            onChange={handlers.js}
+            onChange={() => {
+              handlers.js(!values.js);
+              handlers.page(1);
+            }}
             checkedIcon={false}
             uncheckedIcon={false}
             onColor="#f74700"
@@ -92,12 +107,15 @@ const Filters = ({ values, handlers }) => {
             height={20}
             activeBoxShadow={null}
           />
-          <p className="label ml-3">Javascript</p>
+          <p className="label ml-3">JavaScript</p>
         </div>
         <div className="d-flex flex-row align-items-center mb-1">
           <Switch
             checked={values.java}
-            onChange={handlers.java}
+            onChange={() => {
+              handlers.java(!values.java);
+              handlers.page(1);
+            }}
             checkedIcon={false}
             uncheckedIcon={false}
             onColor="#f74700"
@@ -114,7 +132,10 @@ const Filters = ({ values, handlers }) => {
         <div className="d-flex flex-row align-items-center mb-1">
           <Switch
             checked={values.php}
-            onChange={handlers.php}
+            onChange={() => {
+              handlers.php(!values.php);
+              handlers.page(1);
+            }}
             checkedIcon={false}
             uncheckedIcon={false}
             onColor="#f74700"
@@ -131,7 +152,10 @@ const Filters = ({ values, handlers }) => {
         <div className="d-flex flex-row align-items-center mb-1">
           <Switch
             checked={values.python}
-            onChange={handlers.python}
+            onChange={() => {
+              handlers.python(!values.python);
+              handlers.page(1);
+            }}
             checkedIcon={false}
             uncheckedIcon={false}
             onColor="#f74700"
@@ -148,7 +172,10 @@ const Filters = ({ values, handlers }) => {
         <div className="d-flex flex-row align-items-center mb-1">
           <Switch
             checked={values.ruby}
-            onChange={handlers.ruby}
+            onChange={() => {
+              handlers.ruby(!values.ruby);
+              handlers.page(1);
+            }}
             checkedIcon={false}
             uncheckedIcon={false}
             onColor="#f74700"
@@ -165,7 +192,10 @@ const Filters = ({ values, handlers }) => {
         <div className="d-flex flex-row align-items-center mb-1">
           <Switch
             checked={values.swift}
-            onChange={handlers.swift}
+            onChange={() => {
+              handlers.swift(!values.swift);
+              handlers.page(1);
+            }}
             checkedIcon={false}
             uncheckedIcon={false}
             onColor="#f74700"

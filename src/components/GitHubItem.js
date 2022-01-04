@@ -13,6 +13,9 @@ const GitHubItem = ({ contri }) => {
         (contri.type === "issue" ? " px-2" : " px-3")
       }
       style={{ minWidth: "100%", maxWidth: "100%" }}
+      onClick={() => {
+        window.location = contri.link;
+      }}
     >
       <Col className="githubbox w-100">
         <div>
@@ -21,7 +24,7 @@ const GitHubItem = ({ contri }) => {
               <Image
                 src={
                   contri.type === "issue"
-                    ? "https://github.com/" + contri.link + ".png"
+                    ? "https://github.com/" + contri.repoowner + ".png"
                     : merge
                 }
                 className={contri.type === "issue" ? "issueimage" : "primage"}
@@ -37,7 +40,9 @@ const GitHubItem = ({ contri }) => {
           </Row>
           {contri.type === "issue" && (
             <Row>
-              <p className="description mt-2 mt-md-0">{contri.description}</p>
+              <p className="description mt-2 mt-md-0 max-lines">
+                {contri.description}
+              </p>
             </Row>
           )}
         </div>
