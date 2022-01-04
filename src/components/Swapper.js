@@ -1,28 +1,30 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const Swapper = ({ path }) => {
   let history = useHistory();
+  const username = useParams().username;
+  const pathname = path.split("/")[1];
 
   return (
     <>
-      <div className="d-flex flex-row justify-content-center align-items-center d-lg-none d-xl-none mb-3">
+      <div className="d-flex flex-row justify-content-center align-items-center d-lg-none d-xl-none mb-4">
         <div
           className={
-            "tabswitchxs-issues" + (path === "/issues" ? "-active" : "")
+            "tabswitchxs-issues" + (pathname === "issues" ? "-active" : "")
           }
           onClick={() => {
-            path !== "/issues" && history.push("/issues");
+            pathname !== "issues" && history.push(`/issues/${username}`);
           }}
         >
           Find Issues
         </div>
         <div
           className={
-            "tabswitchxs-progress" + (path === "/progress" ? "-active" : "")
+            "tabswitchxs-progress" + (pathname === "progress" ? "-active" : "")
           }
           onClick={() => {
-            path !== "/progress" && history.push("/progress");
+            pathname !== "progress" && history.push(`/progress/${username}`);
           }}
         >
           Progress
@@ -31,20 +33,20 @@ const Swapper = ({ path }) => {
       <div className="d-none d-lg-block d-xl-block position-absolute top-50 start-0 translate-middle-y">
         <div
           className={
-            "mb-2 tabswitchlg-issues" + (path === "/issues" ? "-active" : "")
+            "mb-2 tabswitchlg-issues" + (pathname === "issues" ? "-active" : "")
           }
           onClick={() => {
-            path !== "/issues" && history.push("/issues");
+            pathname !== "issues" && history.push(`/issues/${username}`);
           }}
         >
           Find Issues
         </div>
         <div
           className={
-            "tabswitchlg-progress" + (path === "/progress" ? "-active" : "")
+            "tabswitchlg-progress" + (pathname === "progress" ? "-active" : "")
           }
           onClick={() => {
-            path !== "/progress" && history.push("/progress");
+            pathname !== "progress" && history.push(`/progress/${username}`);
           }}
         >
           Progress
