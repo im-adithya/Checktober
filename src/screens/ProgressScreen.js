@@ -6,7 +6,6 @@ import axios from "axios";
 import _ from "lodash";
 import moment from "moment";
 
-import { GITHUB_TOKEN } from "../utils/constants.js";
 import GitHubItem from "../components/GitHubItem.js";
 import Swapper from "../components/Swapper.js";
 
@@ -14,6 +13,8 @@ import loaderbg from "../assets/loader-bg.svg";
 import loadermain from "../assets/loader-main.svg";
 import flower from "../assets/flower-icon.svg";
 import brokenflower from "../assets/broken-flower.svg";
+
+const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 const hacktoberPullFilter = (pulls) => {
   const validPulls = pulls.filter((pr) => {

@@ -2,15 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 import { Row, Col, Container, Image } from "react-bootstrap";
 import axios from "axios";
 
-import {
-  GITHUB_TOKEN,
-  resultPerPage,
-  sortOptions,
-} from "../utils/constants.js";
+import { resultPerPage, sortOptions } from "../utils/constants.js";
 import flower from "../assets/flower-icon.svg";
 import GitHubItem from "../components/GitHubItem.js";
 import Filters from "../components/Filters.js";
 import Swapper from "../components/Swapper.js";
+
+const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 String.prototype.camelToSpaces = function () {
   return this.replace(/([a-z])([A-Z])/g, "$1 $2");
