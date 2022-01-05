@@ -2,7 +2,7 @@
    <img src="https://user-images.githubusercontent.com/64399555/148164024-31a69e2e-317e-4a83-b313-9a32910f6e55.jpg">
 </p>
 
-<h1 align="center">Checktoberfest</h1>
+<h1 align="center">Checktober</h1>
 <p align="center">
     <img src="https://img.shields.io/github/issues/im-adithya/Checktober?style=flat&logo=buffer&color=blueviolet&logoColor=white">
     <img src="https://img.shields.io/github/issues-closed/im-adithya/Checktober?style=flat&logo=checkmarx&color=success&logoColor=white">
