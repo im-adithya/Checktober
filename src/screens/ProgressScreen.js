@@ -14,6 +14,7 @@ import loadermain from "../assets/loader-main.svg";
 import flower from "../assets/flower-icon.svg";
 import brokenflower from "../assets/broken-flower.svg";
 
+// eslint-disable-next-line no-undef
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 const hacktoberPullFilter = (pulls) => {

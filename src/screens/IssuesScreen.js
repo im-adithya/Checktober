@@ -8,6 +8,7 @@ import GitHubItem from "../components/GitHubItem.js";
 import Filters from "../components/Filters.js";
 import Swapper from "../components/Swapper.js";
 
+// eslint-disable-next-line no-undef
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 String.prototype.camelToSpaces = function () {
