@@ -24,7 +24,7 @@ const GitHubItem = ({ contri }) => {
               <Image
                 src={
                   contri.type === "issue"
-                    ? "https://github.com/" + contri.repoowner + ".png"
+                    ? "https://www.github.com/" + contri.repoowner + ".png"
                     : merge
                 }
                 className={contri.type === "issue" ? "issueimage" : "primage"}
